@@ -1,0 +1,7 @@
+
+
+报错：Failed to start bean 'documentationPluginsBootstrapper';
+nested exception is java.lang.NullPointerEx
+原因： 这是因为Springfox使用的路径匹配是基于AntPathMatcher的，
+而Spring Boot 2.6.X使用的是PathPatternMatcher。
+解决： 修改application.yaml spring: mvc: pathmatch: matching-strategy: ANT_PATH_MATCHER
