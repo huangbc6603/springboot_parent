@@ -2,7 +2,15 @@ package cn.huangbc.springbootweb.bean;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -11,56 +19,22 @@ import java.io.Serializable;
  * @date 2021/12/21 8:34
  */
 @ApiModel
-//@NoArgsConstructor
-//@AllArgsConstructor
-//@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class User implements Serializable {
 
+    @NotNull
     @ApiModelProperty(value = "用户id")
+    @Min(value = 2,message = "大于等于2")
+    @Max(value = 100 ,message = "最大不能超过100")
     private Integer id;
+
+    @Length(min = 2, max = 10)
     @ApiModelProperty(value = "用户名")
     private String username;
+
     @ApiModelProperty(value = "用户地址")
     private String address;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public User(Integer id, String username, String address) {
-        this.id = id;
-        this.username = username;
-        this.address = address;
-    }
-
-    public User() {
-    }
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", address='" + address + '\'' +
-                '}';
-    }
 }
